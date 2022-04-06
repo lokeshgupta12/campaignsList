@@ -7,6 +7,7 @@
 - npm start (application will start with http://localhost:3000/)
 - npm test (For test cases)
 - Call AddCampaigns from Browser Console for adding campaign
+- when adding capaign data use unique id
 
 ## Dependencies used
 - react-bootstrap
