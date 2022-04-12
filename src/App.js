@@ -12,8 +12,8 @@ import { checkJsonData, mapCampListData } from "./utils/helper";
 function App() {
   const [campList, setCampList] = useState([]);
   const dispatch = useDispatch();
-  const getCampaignList = useSelector(appSelector.getCampaignList());
-  const getuserList = useSelector(appSelector.getUserList());
+  const getCampaignList = useSelector(appSelector?.getCampaignList());
+  const getuserList = useSelector(appSelector?.getUserList());
 
   // useEffect for dispatch a action to get List of Users from API
   useEffect(() => {
@@ -64,8 +64,8 @@ function App() {
     <div className="App">
       <LoadingHoc>
         <SearchComponent
-          onChange={(startDate, enddate, name) =>
-            onChange(startDate, enddate, name)
+          onChange={(startDate, endDate, name) =>
+            onChange(startDate, endDate, name)
           }
           dateChangeHandler={dateChangeHandler}
         />

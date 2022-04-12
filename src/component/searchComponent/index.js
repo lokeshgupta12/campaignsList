@@ -13,7 +13,7 @@ const SearchComponent = ({ onChange, dateChangeHandler }) => {
    * @param startDate, endDate, $event
    */
   const onChangeHandler = ($event) => {
-    onChange(startDate, endDate, $event.target.value);
+    onChange(startDate, endDate, $event?.target?.value);
   };
 
   /**

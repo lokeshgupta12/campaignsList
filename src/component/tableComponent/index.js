@@ -44,19 +44,20 @@ const ReportPage = ({ list }) => {
    * @returns {*}
    */
   const processTableData = (list) => {
-    const processedList = list.map((rowData, index) => {
-      const activeStatus = checkActiveness(rowData.startDate, rowData.endDate);
+    const processedList = list.map((rowData) => {
+      const {startDate, endDate, id, name, username, budget} = rowData
+      const activeStatus = checkActiveness(startDate, endDate);
       return (
-        <tr key={rowData.id}>
-          <td>{rowData.name}</td>
-          <td>{rowData.username}</td>
-          <td>{rowData.startDate}</td>
-          <td>{rowData.endDate}</td>
+        <tr key={id}>
+          <td>{name}</td>
+          <td>{username}</td>
+          <td>{startDate}</td>
+          <td>{endDate}</td>
           <td>
             <span className={activeStatus ? "active" : "inActive"}></span>
             <span>{activeStatus ? ACTIVE : INACTIVE}</span>
           </td>
-          <td>{processBudgetInUSD(rowData.budget)}</td>
+          <td>{processBudgetInUSD(budget)}</td>
         </tr>
       );
     });
