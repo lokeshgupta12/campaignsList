@@ -58,15 +58,15 @@ const convertToCurrencySystem = (labelValue) => {
     : Math.abs(Number(labelValue));
 };
 
-// check dates, is Valid Or Not 
+// check dates, is Valid Or Not
 const checkJsonData = (arr) => {
   let validData = [];
   let invalidData = [];
   arr.forEach((element) => {
     const { startDate, endDate } = element;
     if (
-      moment(startDate).isValid() &&
-      moment(endDate).isValid() &&
+      moment(startDate, "MM/DD/YYYY").isValid() &&
+      moment(endDate, "MM/DD/YYYY").isValid() &&
       moment(startDate).isSameOrBefore(endDate)
     ) {
       validData.push(element);

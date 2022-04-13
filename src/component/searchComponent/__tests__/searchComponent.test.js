@@ -1,8 +1,8 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import SearchComponent from "../index";
 const renderComponent = (props) => render(<SearchComponent {...props} />);
-
 const searchProps = {
   onChange: jest.fn(),
   onStartDateChange: jest.fn(),
@@ -10,30 +10,29 @@ const searchProps = {
 };
 
 test("Should render component ", () => {
-  const { container } = renderComponent(searchProps);
-  expect(container).toBeTruthy();
+  renderComponent(searchProps);
+  expect(screen).toBeTruthy();
 });
 
 test("When Enter Test value In search box", () => {
-  const { queryByPlaceholderText } = renderComponent(searchProps);
+  renderComponent(searchProps);
 
-  const searchInput = queryByPlaceholderText("Search By Name");
-
-  fireEvent.change(searchInput, { target: { value: "test" } });
+  const searchInput = screen.queryByPlaceholderText("Search By Name");
+  userEvent.type(searchInput, "test");
 
   expect(searchInput.value).toBe("test");
 });
 
-test("Check Placeholder for Start DatePicker", () => {
+test("Check Start Date present in Document", () => {
   renderComponent(searchProps);
 
-  const startDateNode = screen.getByPlaceholderText(/Start Date/i);
+  const startDateNode = screen.getByTestId(/Start Date/i);
   expect(startDateNode).toBeInTheDocument();
 });
 
-test("Check Placeholder for End DatePicker", () => {
+test("Check End Date present in Document", () => {
   renderComponent(searchProps);
 
-  const endDateNode = screen.getByPlaceholderText(/End Date/i);
+  const endDateNode = screen.getByTestId(/End Date/i);
   expect(endDateNode).toBeInTheDocument();
 });

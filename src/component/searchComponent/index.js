@@ -40,8 +40,9 @@ const SearchComponent = ({ onChange, dateChangeHandler }) => {
     ({ value, onClick, handleReset, placeholderText }, ref) => (
       <div className="react-datepicker__input-container">
         <input
-          tyoe="text"
+          type="text"
           value={value}
+          data-testid={placeholderText}
           className="form-control date-picker react-datepicker-ignore-onclickoutside"
           onClick={onClick}
           ref={ref}

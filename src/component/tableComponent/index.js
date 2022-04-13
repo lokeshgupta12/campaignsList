@@ -45,7 +45,7 @@ const ReportPage = ({ list }) => {
    */
   const processTableData = (list) => {
     const processedList = list.map((rowData) => {
-      const {startDate, endDate, id, name, username, budget} = rowData
+      const { startDate, endDate, id, name, username, budget } = rowData;
       const activeStatus = checkActiveness(startDate, endDate);
       return (
         <tr key={id}>
