@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
 import "./styles.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { PLACEHOLDER_TEXT } from "../../common/constant";
+import {
+  PLACEHOLDER_TEXT,
+  START_DATE_TEST_ID,
+  END_DATE_TEST_ID,
+} from "../../common/constant";
 
 const SearchComponent = ({ onChange, dateChangeHandler }) => {
   const [startDate, setStartDate] = useState("");
@@ -12,37 +17,36 @@ const SearchComponent = ({ onChange, dateChangeHandler }) => {
    * Passing startDate, endDate and search name to the parent AppComponent
    * @param startDate, endDate, $event
    */
-  const onChangeHandler = ($event) => {
-    onChange(startDate, endDate, $event?.target?.value);
+  const onChangeHandler = (event) => {
+    const { value } = event?.target;
+    onChange(startDate, endDate, value);
   };
 
   /**
    * Render Close Icon In DatePicker
    * @param OnClick
    */
-  const CloseButton = ({ onClick }) => {
-    return (
-      <button
-        type="button"
-        className="close closeIcon"
-        aria-label="Close"
-        onClick={onClick}
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    );
-  };
+  const CloseButton = ({ onClick }) => (
+    <button
+      type="button"
+      className="close closeIcon"
+      aria-label="Close"
+      onClick={onClick}
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  );
 
   /**
    * Custom Input for DatePicker
    */
   const CustomInput = React.forwardRef(
-    ({ value, onClick, handleReset, placeholderText }, ref) => (
+    ({ value, onClick, handleReset, placeholderText, testId }, ref) => (
       <div className="react-datepicker__input-container">
         <input
           type="text"
           value={value}
-          data-testid={placeholderText}
+          data-testid={testId}
           className="form-control date-picker react-datepicker-ignore-onclickoutside"
           onClick={onClick}
           ref={ref}
@@ -73,6 +77,7 @@ const SearchComponent = ({ onChange, dateChangeHandler }) => {
                       dateChangeHandler("", endDate);
                     }}
                     placeholderText={PLACEHOLDER_TEXT.START_DATE}
+                    testId={START_DATE_TEST_ID}
                   />
                 }
               />
@@ -92,6 +97,7 @@ const SearchComponent = ({ onChange, dateChangeHandler }) => {
                       dateChangeHandler(startDate, "");
                     }}
                     placeholderText={PLACEHOLDER_TEXT.END_DATE}
+                    testId={END_DATE_TEST_ID}
                   />
                 }
                 minDate={new Date(startDate)}
@@ -121,4 +127,8 @@ const SearchComponent = ({ onChange, dateChangeHandler }) => {
   );
 };
 
+SearchComponent.propTypes = {
+  onChange: PropTypes.func.isRequired,
+  dateChangeHandler: PropTypes.func.isRequired,
+};
 export default SearchComponent;

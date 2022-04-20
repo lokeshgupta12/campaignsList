@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { appSelector } from "../../../store/selectors";
+import { getAPIStatus } from "../../../store/selectors";
 import { FetchEnumStatus } from "../../../store/reducers";
 import "./styles.css";
 
 const LoadingHoc = ({ children }) => {
-  const getAPIStatus = useSelector(appSelector?.getAPIStatus());
+  const fetchAPIStatus = useSelector(getAPIStatus());
   return (
     <>
-      {getAPIStatus === FetchEnumStatus?.FETCHING && (
+      {fetchAPIStatus === FetchEnumStatus?.FETCHING && (
         <div className="coverSpin"></div>
       )}
       {children}

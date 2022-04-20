@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import TableComponent from "./component/tableComponent";
 import SearchComponent from "./component/searchComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStatusSliceActions } from "./store/reducers/appSlice";
 import { fetchUserCampaignListCreator } from "./store/actions";
-import { appSelector } from "./store/selectors";
+import { getCampaignList, getUserList } from "./store/selectors";
 import "./App.css";
 import LoadingHoc from "./component/HOC/LoadingHoc";
 import { checkJsonData, mapCampListData } from "./utils/helper";
 
 function App() {
-  const [campList, setCampList] = useState([]);
   const dispatch = useDispatch();
-  const getCampaignList = useSelector(appSelector?.getCampaignList());
-  const getuserList = useSelector(appSelector?.getUserList());
+  const getCampaignsList = useSelector(getCampaignList());
+  const getuserList = useSelector(getUserList());
 
   // useEffect for dispatch a action to get List of Users from API
   useEffect(() => {
     dispatch(fetchUserCampaignListCreator());
   }, [dispatch]);
-
-  useEffect(() => {
-    setCampList(getCampaignList);
-  }, [getCampaignList]);
 
   /**
    * AddCampaigns method to add campaign from global through browser console
@@ -45,7 +40,7 @@ function App() {
 
   const onChange = (startDate, endDate, name) => {
     dispatch(
-      fetchStatusSliceActions.filterRecordByName({ startDate, endDate, name })
+      fetchStatusSliceActions.filterRecordsData({ startDate, endDate, name })
     );
   };
 
@@ -69,7 +64,7 @@ function App() {
           }
           dateChangeHandler={dateChangeHandler}
         />
-        <TableComponent list={campList} />
+        <TableComponent list={getCampaignsList} />
       </LoadingHoc>
     </div>
   );

@@ -26,13 +26,13 @@ test("When Enter Test value In search box", () => {
 test("Check Start Date present in Document", () => {
   renderComponent(searchProps);
 
-  const startDateNode = screen.getByTestId(/Start Date/i);
+  const startDateNode = screen.getByTestId("start-date-test-id");
   expect(startDateNode).toBeInTheDocument();
 });
 
 test("Check End Date present in Document", () => {
   renderComponent(searchProps);
 
-  const endDateNode = screen.getByTestId(/End Date/i);
+  const endDateNode = screen.getByTestId("end-date-test-id");
   expect(endDateNode).toBeInTheDocument();
 });

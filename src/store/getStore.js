@@ -7,8 +7,7 @@ import { rootReducer } from "./reducers";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const enhancer = applyMiddleware(sagaMiddleware);
-const store = createStore(rootReducer || (() => {}), enhancer);
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 export const getStore = () => store;
 

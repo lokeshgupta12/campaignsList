@@ -1,17 +1,11 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const getAppData = (state) => state.appState;
-const fetchCampaignList = createSelector(
-  [getAppData],
-  (data) => data?.cloneFilterList
-);
+const getAppData = ({ appState }) => appState;
+export const getCampaignList = () =>
+  createSelector([getAppData], (data) => data?.cloneFilterList);
 
-const fetchApiStatus = createSelector([getAppData], (data) => data?.apiStatus);
+export const getAPIStatus = () =>
+  createSelector([getAppData], ({ apiStatus }) => apiStatus);
 
-const fetchUserList = createSelector([getAppData], (data) => data?.userData);
-
-export const appSelector = {
-  getCampaignList: () => fetchCampaignList,
-  getAPIStatus: () => fetchApiStatus,
-  getUserList: () => fetchUserList,
-};
+export const getUserList = () =>
+  createSelector([getAppData], ({ userData }) => userData);

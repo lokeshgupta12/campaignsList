@@ -1,6 +1,6 @@
 import {
   filterRecordsByDate,
-  filterRecordsByName,
+  filterRecords,
   convertToCurrencySystem,
   checkJsonData,
   mapCampListData,
@@ -60,12 +60,7 @@ test("filter records by name", () => {
   ];
   const inputSearch = "sam";
 
-  const result = filterRecordsByName(
-    startDate,
-    endDate,
-    inputResult,
-    inputSearch
-  );
+  const result = filterRecords(startDate, endDate, inputResult, inputSearch);
   expect(result.length).toEqual(1);
 });
 

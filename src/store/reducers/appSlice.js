@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { filterRecordsByDate, filterRecordsByName } from "../../utils/helper";
+import { filterRecordsByDate, filterRecords } from "../../utils/helper";
 
 export const FetchEnumStatus = {
   FETCHING: "FETCHING",
@@ -51,16 +51,16 @@ export const fetchStatusSlice = createSlice({
       );
       return { ...state, cloneFilterList: filteredRecord };
     },
-    filterRecordByName: (state, action) => {
+    filterRecordsData: (state, action) => {
       const { startDate, endDate, name } = action.payload;
       const { campaignList } = state;
-      const filterRecordByName = filterRecordsByName(
+      const filterRecordData = filterRecords(
         startDate,
         endDate,
         campaignList,
         name
       );
-      return { ...state, cloneFilterList: filterRecordByName };
+      return { ...state, cloneFilterList: filterRecordData };
     },
   },
 });

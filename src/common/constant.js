@@ -16,3 +16,5 @@ export const ACTIVE = "Active";
 export const INACTIVE = "In-Active";
 export const NO_RECORDS = "No Records";
 export const USER_API_URL = "https://jsonplaceholder.typicode.com/users";
+export const START_DATE_TEST_ID = "start-date-test-id";
+export const END_DATE_TEST_ID = "end-date-test-id";

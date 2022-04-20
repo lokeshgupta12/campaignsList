@@ -5,5 +5,4 @@ export const rootReducer = combineReducers({
   appState: fetchStatusSliceReducer,
 });
 
-export { fetchUserCampaignTypeName } from "../actions";
 export { FetchEnumStatus, fetchStatusSliceActions } from "./appSlice";

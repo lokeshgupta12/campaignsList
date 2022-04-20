@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import "./styles.css";
 import { convertToCurrencySystem } from "../../utils/helper";
 import { INACTIVE, ACTIVE, NO_RECORDS } from "../../common/constant";
@@ -17,34 +18,24 @@ const ReportPage = ({ list }) => {
    * @param endDate
    * @returns {boolean}
    */
-  const checkActiveness = (startDate, endDate) => {
-    let activeStatus = null;
-    const compareWithStartDate =
-      Date.parse(startDate) < Date.parse(getCurrentDate());
-    const compareWithEndDate =
-      Date.parse(getCurrentDate()) < Date.parse(endDate);
-    compareWithStartDate && compareWithEndDate
-      ? (activeStatus = true)
-      : (activeStatus = false);
-    return activeStatus;
-  };
+  const checkActiveness = (startDate, endDate) =>
+    Date.parse(startDate) <= Date.parse(getCurrentDate()) &&
+    Date.parse(getCurrentDate()) <= Date.parse(endDate);
 
   /**
    * Budget value processing
    * @param budget
    * @returns {string}
    */
-  const processBudgetInUSD = (budget) => {
-    let budgeResult = budget ? convertToCurrencySystem(budget) : "";
-    return budgeResult;
-  };
+  const processBudgetInUSD = (budget) =>
+    budget ? convertToCurrencySystem(budget) : "";
   /**
    * Render table data
    * @param list
    * @returns {*}
    */
-  const processTableData = (list) => {
-    const processedList = list.map((rowData) => {
+  const processTableData = (list) =>
+    list.map((rowData) => {
       const { startDate, endDate, id, name, username, budget } = rowData;
       const activeStatus = checkActiveness(startDate, endDate);
       return (
@@ -61,34 +52,33 @@ const ReportPage = ({ list }) => {
         </tr>
       );
     });
-    return processedList;
-  };
   /**
    * Render table structure
    * @returns {*}
    */
-  const renderTable = () => {
-    return (
-      <div className="table-container">
-        <table className="table table-striped">
-          <thead className="table-header">
-            <tr>
-              <th>Name</th>
-              <th>User Name</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Active</th>
-              <th>Budget (USD)</th>
-            </tr>
-          </thead>
-          <tbody>{processTableData(list)}</tbody>
-        </table>
-      </div>
-    );
-  };
+  const renderTable = () => (
+    <div className="table-container">
+      <table className="table table-striped">
+        <thead className="table-header">
+          <tr>
+            <th>Name</th>
+            <th>User Name</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Active</th>
+            <th>Budget (USD)</th>
+          </tr>
+        </thead>
+        <tbody>{processTableData(list)}</tbody>
+      </table>
+    </div>
+  );
 
   const renderBlankRecord = () => <div className="noRecords">{NO_RECORDS}</div>;
   return <div>{list?.length > 0 ? renderTable() : renderBlankRecord()}</div>;
 };
 
+ReportPage.propTypes = {
+  list: PropTypes.array.isRequired,
+};
 export default ReportPage;

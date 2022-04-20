@@ -24,8 +24,8 @@ const filterRecordsByDate = (startDate, endDate, campList) => {
   return filteredData;
 };
 
-// Filter Records On behalf Of name
-const filterRecordsByName = (startDate, endDate, campaignList, name) => {
+// Filter Records
+const filterRecords = (startDate, endDate, campaignList, name) => {
   const filteredRecord = filterRecordsByDate(startDate, endDate, campaignList);
   let filteredData = [];
   if (!!name) {
@@ -39,12 +39,11 @@ const filterRecordsByName = (startDate, endDate, campaignList, name) => {
   return filteredData;
 };
 
-const convertToCurrencySystem = (labelValue) => {
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e9
+const convertToCurrencySystem = (labelValue) =>
+  Math.abs(Number(labelValue)) >= 1.0e9
     ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(2) +
-        BUDGET_SYMBOL.B +
-        BUDGET_SYMBOL.USD
+      BUDGET_SYMBOL.B +
+      BUDGET_SYMBOL.USD
     : // Six Zeroes for Millions
     Math.abs(Number(labelValue)) >= 1.0e6
     ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(2) +
@@ -56,7 +55,6 @@ const convertToCurrencySystem = (labelValue) => {
       BUDGET_SYMBOL.K +
       BUDGET_SYMBOL.USD
     : Math.abs(Number(labelValue));
-};
 
 // check dates, is Valid Or Not
 const checkJsonData = (arr) => {
@@ -81,8 +79,8 @@ const checkJsonData = (arr) => {
 };
 
 // common method for mapping userData and CampListData
-const mapCampListData = (userData, campData) => {
-  return campData.map((rowdata) => {
+const mapCampListData = (userData, campData) =>
+  campData.map((rowdata) => {
     const index = userData.findIndex(
       (resData) => resData.id === rowdata.userId
     );
@@ -96,11 +94,10 @@ const mapCampListData = (userData, campData) => {
       username: index >= 0 ? userData[index].username : UNKOWN_USER,
     };
   });
-};
 
 export {
   filterRecordsByDate,
-  filterRecordsByName,
+  filterRecords,
   convertToCurrencySystem,
   checkJsonData,
   mapCampListData,

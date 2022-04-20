@@ -1,9 +1,6 @@
 import { takeEvery, call, put } from "redux-saga/effects";
-import {
-  fetchStatusSliceActions,
-  FetchEnumStatus,
-  fetchUserCampaignTypeName,
-} from "../reducers";
+import { fetchStatusSliceActions, FetchEnumStatus } from "../reducers";
+import { fetchUserCampaignTypeName } from "../actions";
 import data from "./mockList";
 import { mapCampListData } from "../../utils/helper";
 import { USER_API_URL } from "../../common/constant";
